@@ -1,0 +1,61 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+  {
+    title: 'Workstream (prototype)',
+    // TODO: sharpen this once you've confirmed what the prototype showcases
+    description:
+      'Prototype exploring the next iteration of Workstream — HR, hiring, and payroll for hourly, multi-location teams (restaurants and beyond).',
+    image: '/assets/images/workstream_cover.png',
+    href: 'https://workstream-prototype.vercel.app/',
+    linkLabel: 'View prototype',
+  },
+  {
+    title: 'TCG Unite',
+    description:
+      'A platform for trading card game enthusiasts to connect, trade, and manage collections. Founded and shipped live at tcgunite.co.',
+    image: '/assets/images/tcgunite_cover.png',
+    href: 'https://www.tcgunite.co/',
+    linkLabel: 'Visit site',
+  },
+  {
+    title: 'ExxonMobil Fuel Loyalty App',
+    description:
+      'Led the 0→1 build of the consumer iOS/Android app for ExxonMobil\'s loyalty program. Owned roadmap and delivery; launched in Singapore and scaled across markets.',
+    image: '/assets/images/exxon_cover.png',
+  },
+  {
+    title: 'Kaiva — Artist Marketplace',
+    description:
+      'E-commerce marketplace connecting independent artists with buyers: creator onboarding, storefronts, commissions, checkout, order tracking.',
+    image: '/assets/images/kaiva_cover.png',
+  },
+  {
+    title: 'Enterprise Analytics Platform',
+    description:
+      'Led product development for data analytics at Outer Labs, enabling businesses to make data-driven decisions at scale.',
+    tone: 'indigo' as const,
+    glyph: 'chart' as const,
+  },
+  {
+    title: 'Digital Transformation',
+    description:
+      'Drove digital transformation projects at Publicis Sapient, helping Fortune 500 clients modernize their stack and customer experiences.',
+    tone: 'amber' as const,
+    glyph: 'transform' as const,
+  },
+];
+---
+
+<section id="work" class="py-24 md:py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-end justify-between mb-12">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-100">Selected work</h2>
+      <p class="text-neutral-500 text-sm hidden md:block">6 projects · 100k+ users impacted</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((p) => <ProjectCard {...p} />)}
+    </div>
+  </div>
+</section>

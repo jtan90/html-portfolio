@@ -1,0 +1,70 @@
+---
+// TODO: replace with your real Calendly URL
+const CALENDLY_URL = 'https://calendly.com/';
+const EMAIL = 'jt88@rice.edu';
+const LINKEDIN = 'https://www.linkedin.com/in/joachimtan';
+const GITHUB = 'https://github.com/joatan99';
+const MAP_SRC =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.378127774896!2d-122.40212922423093!3d37.7811773117914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807e465d6d9f%3A0x67ca678d521ed451!2s788%20Harrison%20St%2C%20San%20Francisco%2C%20CA%2094107%2C%20USA!5e0!3m2!1sen!2ssg!4v1756889740006!5m2!1sen!2ssg';
+---
+
+<section id="contact" class="py-24 md:py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <div
+      data-reveal
+      class="rounded-3xl border border-neutral-800 bg-neutral-900/60 overflow-hidden grid grid-cols-1 md:grid-cols-2"
+    >
+      <!-- Map side -->
+      <div class="relative min-h-[380px] md:min-h-[520px] bg-neutral-950">
+        <iframe
+          src={MAP_SRC}
+          title="Based in San Francisco"
+          class="absolute inset-0 w-full h-full border-0 [filter:invert(92%)_grayscale(60%)_contrast(1.05)_hue-rotate(180deg)] opacity-90"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div
+          class="absolute left-6 bottom-6 md:left-8 md:bottom-8 rounded-2xl bg-neutral-950/90 backdrop-blur border border-neutral-800 px-5 py-4 max-w-xs"
+        >
+          <div class="text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Based in</div>
+          <div class="text-neutral-100 font-medium leading-snug">
+            788 Harrison St<br />San Francisco, CA 94107
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA side -->
+      <div class="p-10 md:p-14 flex flex-col justify-center">
+        <h2 class="text-3xl md:text-5xl font-semibold tracking-tight text-neutral-100">Let's talk.</h2>
+        <p class="mt-4 text-neutral-400 leading-relaxed">
+          Always open to discussing new projects and opportunities — drop a line or pick a time on my calendar.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${EMAIL}`}
+            class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-neutral-900 font-medium hover:bg-neutral-200 transition"
+          >
+            Email me
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href={CALENDLY_URL}
+            class="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-neutral-100 font-medium border border-neutral-800 hover:border-neutral-700 transition"
+          >
+            Book a call
+          </a>
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-neutral-100 font-medium border border-neutral-800 hover:border-neutral-700 transition"
+          >
+            LinkedIn
+          </a>
+        </div>
+        <div class="mt-8 text-sm text-neutral-500">
+          Or find me on <a href={GITHUB} class="text-neutral-300 hover:text-neutral-100 transition">GitHub</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
