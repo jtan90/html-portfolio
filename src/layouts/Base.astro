@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Joachim Tan',
+  description = 'Joachim Tan — product & engineering across startups and Fortune 500.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEEDE1GB8S"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TEEDE1GB8S');
+    </script>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased">
+    <slot />
+
+    <script is:inline>
+      (() => {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) {
+          document
+            .querySelectorAll('[data-reveal]')
+            .forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+
+        // Fade-in-on-scroll
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+
+        // Count-up numbers
+        const formatNumber = (n) => n.toLocaleString('en-US');
+        const countObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              const target = Number(el.dataset.countTo);
+              const duration = 1400;
+              const start = performance.now();
+              const tick = (now) => {
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 3);
+                el.textContent = formatNumber(Math.round(target * eased));
+                if (t < 1) requestAnimationFrame(tick);
+                else el.textContent = formatNumber(target);
+              };
+              requestAnimationFrame(tick);
+              countObserver.unobserve(el);
+            });
+          },
+          { threshold: 0.5 }
+        );
+        document.querySelectorAll('[data-count-to]').forEach((el) => countObserver.observe(el));
+      })();
+    </script>
+  </body>
+</html>

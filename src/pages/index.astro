@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+    <Stats />
+    <Projects />
+    <Skills />
+    <Testimonial />
+    <Contact />
+
+    <footer class="border-t border-neutral-800 py-10">
+      <div class="max-w-6xl mx-auto px-6 text-sm text-neutral-500 flex items-center justify-between">
+        <p>&copy; 2026 Joachim Tan</p>
+        <div class="flex items-center gap-5">
+          <a href="https://www.linkedin.com/in/joachimtan" class="hover:text-neutral-100 transition">LinkedIn</a>
+          <a href="https://github.com/joatan99" class="hover:text-neutral-100 transition">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Base>

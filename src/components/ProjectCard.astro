@@ -1,0 +1,123 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  href?: string;
+  linkLabel?: string;
+  tone?: 'indigo' | 'teal' | 'amber' | 'rose' | 'workstream';
+  glyph?: 'chart' | 'transform';
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt = title,
+  href,
+  linkLabel = 'View case study',
+  tone = 'indigo',
+  glyph,
+} = Astro.props;
+
+const toneBg: Record<NonNullable<Props['tone']>, string> = {
+  indigo: 'from-indigo-500/40 to-indigo-800/60',
+  teal: 'from-teal-500/40 to-teal-800/60',
+  amber: 'from-amber-500/40 to-amber-800/60',
+  rose: 'from-rose-500/40 to-rose-800/60',
+  workstream: 'from-orange-500/70 via-slate-900 to-slate-950',
+};
+
+const glyphStroke: Record<NonNullable<Props['tone']>, string> = {
+  indigo: 'text-indigo-100',
+  teal: 'text-teal-100',
+  amber: 'text-amber-100',
+  rose: 'text-rose-100',
+  workstream: 'text-orange-100',
+};
+---
+
+<article
+  data-reveal
+  class="group bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-neutral-700 hover:shadow-xl hover:shadow-black/40 transition"
+>
+  <div class="aspect-[16/10] overflow-hidden flex items-center justify-center text-neutral-100 font-medium text-lg bg-neutral-950/60">
+    {
+      image ? (
+        <img
+          src={image}
+          alt={imageAlt}
+          class="max-w-[88%] max-h-[88%] object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
+          loading="lazy"
+        />
+      ) : (
+        <div class={`relative w-full h-full bg-gradient-to-br ${toneBg[tone]} flex items-center justify-center overflow-hidden`}>
+          {/* subtle grid pattern */}
+          <div
+            class="absolute inset-0 opacity-[0.08]"
+            style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 24px 24px;"
+          />
+          {/* soft orb glow */}
+          <div class="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-white/20 blur-3xl" />
+
+          {/* glyph */}
+          {glyph === 'chart' && (
+            <svg
+              viewBox="0 0 200 140"
+              class={`relative z-10 w-[55%] h-auto ${glyphStroke[tone]} opacity-90`}
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <line x1="20" y1="120" x2="180" y2="120" />
+              <rect x="34" y="80" width="18" height="40" rx="3" fill="currentColor" opacity="0.35" />
+              <rect x="66" y="60" width="18" height="60" rx="3" fill="currentColor" opacity="0.55" />
+              <rect x="98" y="40" width="18" height="80" rx="3" fill="currentColor" opacity="0.75" />
+              <rect x="130" y="24" width="18" height="96" rx="3" fill="currentColor" />
+              <path d="M34 96 L66 76 L98 56 L130 36" stroke-width="2.5" />
+              <circle cx="34" cy="96" r="3" fill="currentColor" />
+              <circle cx="66" cy="76" r="3" fill="currentColor" />
+              <circle cx="98" cy="56" r="3" fill="currentColor" />
+              <circle cx="130" cy="36" r="3" fill="currentColor" />
+            </svg>
+          )}
+          {glyph === 'transform' && (
+            <svg
+              viewBox="0 0 200 140"
+              class={`relative z-10 w-[55%] h-auto ${glyphStroke[tone]} opacity-90`}
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="30" y="38" width="56" height="56" rx="4" opacity="0.9" />
+              <circle cx="142" cy="66" r="30" opacity="0.9" />
+              <path d="M88 56 L112 56 M112 56 L106 50 M112 56 L106 62" stroke-width="2.5" />
+              <path d="M114 80 L90 80 M90 80 L96 74 M90 80 L96 86" stroke-width="2.5" />
+              <circle cx="142" cy="66" r="6" fill="currentColor" />
+            </svg>
+          )}
+          {!glyph && <span class="relative z-10 opacity-80">{title}</span>}
+        </div>
+      )
+    }
+  </div>
+  <div class="p-6">
+    <h3 class="text-lg font-semibold text-neutral-100 tracking-tight">{title}</h3>
+    <p class="mt-2 text-neutral-400 text-sm leading-relaxed">{description}</p>
+    {
+      href && (
+        <a
+          href={href}
+          class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-neutral-100 hover:gap-2.5 transition-all"
+        >
+          {linkLabel}
+          <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
+  </div>
+</article>

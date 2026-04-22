@@ -1,0 +1,31 @@
+---
+const skills = [
+  'Product Management',
+  'Go-to-market',
+  'Python',
+  'MongoDB',
+  'JavaScript',
+  'React / Next.js',
+  'Analytics',
+  'E-commerce',
+];
+---
+
+<section id="about" class="py-24 md:py-32">
+  <div class="max-w-6xl mx-auto px-6" data-reveal>
+    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-100">Skills & tools</h2>
+    <p class="mt-4 text-neutral-400 max-w-2xl leading-relaxed">
+      Experience spans data analytics, e-commerce, consulting, and energy. Shipped apps and data pipelines
+      with Flutter, Python, MongoDB, and React.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-2.5">
+      {
+        skills.map((s) => (
+          <span class="inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm text-neutral-300">
+            {s}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>
